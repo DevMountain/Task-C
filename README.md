@@ -38,11 +38,11 @@ Set up a basic List-Detail view hierarchy using a ```UITableViewController``` fo
 1. Add a ```UITableViewController``` scene that will be used to list tasks
 2. Embed the scene in a ```UINavigationController```
 3. Add an Add system bar button item to the navigation bar
-4. Add a class file ```TaskListTableViewController.swift``` and assign the scene in the Storyboard
+4. Add a class file ```TaskListTableViewController``` and assign the scene in the Storyboard
 5. Add a ```UITableViewController``` scene that will be used to add and view tasks
     * note: We will use a static table view for our Task Detail view, static table views should be used sparingly, but they can be useful for a table view that will never change, such as a basic form.
 6. Add a segue from the Add button from the first scene to the second scene
-7. Add a class file ```TaskDetailTableViewController.swift``` and assign the scene in the Storyboard
+7. Add a class file ```TaskDetailTableViewController``` and assign the scene in the Storyboard
 
 ### Implement Model
 
@@ -129,7 +129,7 @@ Look at the task detail screenshot or in the solution code. Set up the Storyboar
 
 Your Detail View should follow the 'updateWith' pattern for updating the view elements with the details of a model object. 
 
-1. Add an ```updateWithTask(task: Task)``` method
+1. Add an ```-(void)updateWithTask(task: Task)``` method
 2. Implement the 'updateWith' method to update all view elements that reflect details about the model object (in this case, the name text field, the due date text field, and the notes text view)
     * note: Dates require some extra work when we try to set them to labels. We'll implement an extension on ```NSDate``` using an ```NSDateFormatter``` to get a prettier label in the next step.
 
@@ -216,7 +216,7 @@ Implement the 'updateWith' pattern in an extension on the ```ButtonTableViewCell
 Write a protocol for the ```ButtonTableViewCell``` to delegate handling a button tap to the ```TaskListTableViewController```, adopt the protocol, and use the delegate method to mark the task as complete and reload the cell.
 
 1. Add a protocol named ```ButtonTableViewCellDelegate``` to the bottom of the class file
-2. Define a required ```buttonCellButtonTapped:(ButtonTableViewCell *)sender``` method
+2. Define a required ```-(void)buttonCellButtonTapped:(ButtonTableViewCell *)sender``` method
 3. Add a delegate property on the ButtonTableViewCell, require the delegate to have adopted the delegate protocol 
     * note: ```@property (weak, nonatomic) id<ButtonTableViewCellDelegate> delegate```
 4. Update the ```buttonTapped``` IBAction to check if a delegate is assigned, and if so, call the delegate protocol method
@@ -257,23 +257,21 @@ Add a simple Stack to your application to start working with Core Data. You will
 
 Now you need to add a Convenience Initializer to your ```Task.swift``` file that matches our old initializer for the Task object. ```NSManagedObjects``` have a designated initializer called ```init(entity: entity, insertIntoManagedObjectContext: context)``` that gets called by the ``````NSEntityDescription```.entityForName("Task", inManagedObjectContext: context)``` method that is traditionally used to create Managed Objects. You will write a convenience initializer that uses those two designated method calls and then set properties on the Task.
 
-5. Add a Convenience Initializer to the ```Task.swift``` file that matches the old Task initializer
-    * note: You can optionally add a 'managedObjectContext' parameter, but for our app we only have one, and we can set it to a default parameter value of ```Stack.sharedStack.managedObjectContext```)
+5. Add a Convenience Initializer to the ```Task``` file that matches the old Task initializer
+    * note: You can optionally add a 'managedObjectContext' parameter, but for our app we only have one, and we can set it to a default parameter value of ```[Stack sharedInstance].managedObjectContext```)
 
 ```
-convenience init(name: String, notes: String? = nil, due: ```NSDate```? = nil, context: ```NSManagedObjectContext``` = Stack.sharedStack.managedObjectContext) {
+- (instancetype)initWithName:(NSString *)name notes:(NSString *)notes dueDate:(NSDate *)date {
+	
+	Task *task = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[Stack sharedInstance].managedObjectContext];
+	task.name = name;
+	task.notes = notes;
+	task.due = date;
 
-    // there is no graceful way to respond to a failure on ```NSEntityDescription```.entityForName, force unwrapping and forcing a crash is the desired behavior for this app
-    
-    // designated initializer
 
-    let entity = ```NSEntityDescription```.entityForName("Task", inManagedObjectContext: context)!
-    
-    self.init(entity: entity, insertIntoManagedObjectContext: context)
-    
-    // set properties here
 }
 ```
+
 
 ### Update the ```TaskController``` and Other Classes
 
