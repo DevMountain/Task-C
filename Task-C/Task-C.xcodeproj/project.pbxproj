@@ -16,6 +16,7 @@
 		24398E081C408E38007F80EA /* TaskDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24398E071C408E38007F80EA /* TaskDetailTableViewController.m */; };
 		24398E131C409240007F80EA /* TaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24398E121C409240007F80EA /* TaskController.m */; };
 		24398E161C40945B007F80EA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24398E141C40945B007F80EA /* Model.xcdatamodeld */; };
+		24BDF4521C43833800A1B4CD /* NSDate+DateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BDF4511C43833800A1B4CD /* NSDate+DateHelpers.m */; };
 		24EC7BF21C41A6EB000E69AC /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC7BF11C41A6EB000E69AC /* Stack.m */; };
 		24EC7BFD1C41AEE7000E69AC /* Task+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC7BFA1C41AEE7000E69AC /* Task+CoreDataProperties.m */; };
 		24EC7BFE1C41AEE7000E69AC /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC7BFC1C41AEE7000E69AC /* Task.m */; };
@@ -37,6 +38,8 @@
 		24398E111C409240007F80EA /* TaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskController.h; sourceTree = "<group>"; };
 		24398E121C409240007F80EA /* TaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskController.m; sourceTree = "<group>"; };
 		24398E151C40945B007F80EA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		24BDF4501C43833800A1B4CD /* NSDate+DateHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateHelpers.h"; sourceTree = "<group>"; };
+		24BDF4511C43833800A1B4CD /* NSDate+DateHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateHelpers.m"; sourceTree = "<group>"; };
 		24EC7BF01C41A6EB000E69AC /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		24EC7BF11C41A6EB000E69AC /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stack.m; sourceTree = "<group>"; };
 		24EC7BF91C41AEE7000E69AC /* Task+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -81,7 +84,8 @@
 				247F6AEC1C436E9B002204D1 /* Views */,
 				247F6AED1C436EA5002204D1 /* Controllers */,
 				247F6AEE1C436EB0002204D1 /* Model */,
-				24398E141C40945B007F80EA /* Model.xcdatamodeld */,
+				24BDF4501C43833800A1B4CD /* NSDate+DateHelpers.h */,
+				24BDF4511C43833800A1B4CD /* NSDate+DateHelpers.m */,
 				24EC7BF01C41A6EB000E69AC /* Stack.h */,
 				24EC7BF11C41A6EB000E69AC /* Stack.m */,
 				24398DF51C408C19007F80EA /* Assets.xcassets */,
@@ -127,6 +131,7 @@
 				24EC7BFA1C41AEE7000E69AC /* Task+CoreDataProperties.m */,
 				24EC7BFB1C41AEE7000E69AC /* Task.h */,
 				24EC7BFC1C41AEE7000E69AC /* Task.m */,
+				24398E141C40945B007F80EA /* Model.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			files = (
 				24EC7BF21C41A6EB000E69AC /* Stack.m in Sources */,
 				24398E131C409240007F80EA /* TaskController.m in Sources */,
+				24BDF4521C43833800A1B4CD /* NSDate+DateHelpers.m in Sources */,
 				24EC7BFD1C41AEE7000E69AC /* Task+CoreDataProperties.m in Sources */,
 				24398DEE1C408C19007F80EA /* AppDelegate.m in Sources */,
 				24398E161C40945B007F80EA /* Model.xcdatamodeld in Sources */,

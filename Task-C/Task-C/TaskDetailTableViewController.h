@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Task.h"
 
 @interface TaskDetailTableViewController : UITableViewController
 
+@property (strong, nonatomic)Task *task;
 @end

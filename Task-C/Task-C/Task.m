@@ -7,12 +7,19 @@
 //
 
 #import "Task.h"
+#import "Stack.h"
 
 @implementation Task
 
--(instancetype)initWithDueDate:(NSDate *)date isComplete:(NSNumber *)isComplete name:(NSString *)name notes:(NSString *)notes{
-    self.due = date;
-    self.isComplete = isComplete;
+- (instancetype)initWithName:(NSString *)name due:(NSDate *)due notes:(NSString *)notes {
+    
+    NSManagedObjectContext *context = [Stack sharedInstance].managedObjectContext;
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:context];
+    self = [self initWithEntity:entity insertIntoManagedObjectContext:context];
+    
+    self.due = due;
+    self.isComplete = 0;
     self.name = name;
     self.notes = notes;
     return self;

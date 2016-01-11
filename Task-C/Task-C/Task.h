@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Task : NSManagedObject
 
+- (instancetype)initWithName:(NSString *)name due:(NSDate *)due notes:(NSString *)notes;
 
 @end
 

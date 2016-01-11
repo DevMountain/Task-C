@@ -7,6 +7,7 @@
 //
 
 #import "TaskController.h"
+#import "Task.h"
 #import "Stack.h"
 @interface TaskController()
 
@@ -22,6 +23,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [TaskController new];
+        sharedInstance.tasks = [NSArray new];
     });
     return sharedInstance;
 }
@@ -29,10 +31,15 @@
 - (NSArray *)tasks {
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Task"];
+    NSError *error;
     
-    NSArray *tasksArray = [[Stack sharedInstance].managedObjectContext executeFetchRequest:request
-                                                               error:nil];
-    return tasksArray;
+    NSArray *allTasks = [[Stack sharedInstance].managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (error) {
+        NSLog(@"Error fetching objects : %@", error.localizedDescription);
+    }
+
+    return allTasks;
 }
 
 - (NSArray *)completeTasks {
@@ -42,8 +49,8 @@
             [tasksArray addObject:task];
         }
     }
-    
-    return tasksArray;
+    NSArray *tasks = tasksArray;
+    return tasks;
 }
 
 - (NSArray *)incompleteTasks {
@@ -53,14 +60,12 @@
             [tasksArray addObject:task];
         }
     }
-    
-    return tasksArray;
+    NSArray *tasks = tasksArray;
+    return tasks;
 }
 
-- (Task *)addTask {
-    Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:[Stack sharedInstance].managedObjectContext];
+- (void)addTask:(Task *)task {
     [self saveToPersistentStorage];
-    return task;
 }
 
 - (void)removeTask:(Task *)taskToRemove
@@ -73,7 +78,13 @@
 //// MARK: - Persistence
 //
 - (void)saveToPersistentStorage {
-    [[Stack sharedInstance].managedObjectContext save:nil];
+    NSError *error;
+    
+    [[Stack sharedInstance].managedObjectContext save:&error];
+    
+    if (error) {
+        NSLog(@"%@",error.localizedDescription);
+    }
 }
 
 
