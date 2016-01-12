@@ -9,10 +9,10 @@
 #import "TaskListTableViewController.h"
 #import "TaskController.h"
 #import "TaskDetailTableViewController.h"
+#import "ButtonTableViewCell.h"
 
-@interface TaskListTableViewController ()
+@interface TaskListTableViewController () <ButtonTableViewCellDelegate>
 @property(strong, nonatomic)NSMutableArray *tasksArray;
-
 @end
 
 @implementation TaskListTableViewController
@@ -24,7 +24,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    self.tasksArray = [[TaskController sharedInstance].tasks mutableCopy];
+    self.tasksArray = [[TaskController sharedController].incompleteTasks mutableCopy];
     [self.tableView reloadData];
     
 }
@@ -48,10 +48,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+    ButtonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     
     Task *task = self.tasksArray[indexPath.row];
-    cell.textLabel.text = task.name;
+    cell.primaryLabel.text = task.name;
+    [cell updateWithTask:task];
+    cell.delegate = self;
+    
     
     return cell;
 }
@@ -63,7 +66,7 @@
     
         Task *taskToDelete = self.tasksArray[indexPath.row];
         [self.tasksArray removeObject:taskToDelete];
-        [[TaskController sharedInstance] removeTask:taskToDelete];
+        [[TaskController sharedController] removeTask:taskToDelete];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -82,5 +85,17 @@
     
 }
 
+
+-(void)buttonCellButtonTapped:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    Task *task = self.tasksArray[indexPath.row];
+    task.isComplete = [NSNumber numberWithBool:![task.isComplete boolValue]];
+    
+    [[TaskController sharedController] saveToPersistentStorage];
+    
+    self.tasksArray = [[TaskController sharedController].incompleteTasks mutableCopy];
+    [self.tableView reloadData];
+}
 
 @end

@@ -18,7 +18,7 @@
 
 @implementation TaskController
 
-+ (TaskController *)sharedInstance {
++ (TaskController *)sharedController {
     static TaskController *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -43,7 +43,7 @@
 }
 
 - (NSArray *)completeTasks {
-    NSMutableArray *tasksArray;
+    NSMutableArray *tasksArray = [NSMutableArray new];
     for (Task *task in self.tasks) {
         if (task.isComplete.intValue == 1) {
             [tasksArray addObject:task];
@@ -54,7 +54,7 @@
 }
 
 - (NSArray *)incompleteTasks {
-    NSMutableArray *tasksArray;
+    NSMutableArray *tasksArray = [NSMutableArray new];
     for (Task *task in self.tasks) {
         if (task.isComplete.intValue == 0) {
             [tasksArray addObject:task];

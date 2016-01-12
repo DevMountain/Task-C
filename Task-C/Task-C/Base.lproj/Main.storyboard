@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -16,14 +17,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="dhL-lJ-Ibw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="dhL-lJ-Ibw" customClass="ButtonTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dhL-lJ-Ibw" id="TPh-52-GRD">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alV-Xv-j2h">
+                                            <rect key="frame" x="8" y="10" width="530" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WS4-rf-Hw4">
+                                            <rect key="frame" x="560" y="5" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="BgF-aK-Uiy"/>
+                                                <constraint firstAttribute="width" secondItem="WS4-rf-Hw4" secondAttribute="height" multiplier="1:1" id="P71-V1-X8W"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="incomplete"/>
+                                            <connections>
+                                                <action selector="buttonTapped:" destination="dhL-lJ-Ibw" eventType="touchUpInside" id="cdE-Ky-8jj"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="alV-Xv-j2h" firstAttribute="leading" secondItem="TPh-52-GRD" secondAttribute="leadingMargin" id="2op-l5-lhM"/>
+                                        <constraint firstItem="WS4-rf-Hw4" firstAttribute="centerY" secondItem="TPh-52-GRD" secondAttribute="centerY" id="HOt-Lt-CbS"/>
+                                        <constraint firstItem="WS4-rf-Hw4" firstAttribute="centerY" secondItem="alV-Xv-j2h" secondAttribute="centerY" id="Sld-fm-eBi"/>
+                                        <constraint firstItem="WS4-rf-Hw4" firstAttribute="trailing" secondItem="TPh-52-GRD" secondAttribute="trailingMargin" id="UH8-oM-Scf"/>
+                                        <constraint firstItem="WS4-rf-Hw4" firstAttribute="leading" secondItem="alV-Xv-j2h" secondAttribute="trailing" constant="22" id="YJW-bM-cYc"/>
+                                        <constraint firstItem="alV-Xv-j2h" firstAttribute="top" secondItem="TPh-52-GRD" secondAttribute="topMargin" constant="2" id="dNp-Gt-dve"/>
+                                        <constraint firstItem="WS4-rf-Hw4" firstAttribute="top" secondItem="TPh-52-GRD" secondAttribute="topMargin" constant="-3" id="ia2-uK-zna"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="completeButton" destination="WS4-rf-Hw4" id="ctp-vT-CeM"/>
+                                    <outlet property="primaryLabel" destination="alV-Xv-j2h" id="yiK-Qa-fNb"/>
                                     <segue destination="vnN-nS-rxS" kind="show" identifier="toViewTask" id="mBH-by-q9D"/>
                                 </connections>
                             </tableViewCell>
@@ -52,7 +83,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="7Km-xr-4cp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Name" id="RyT-ea-mho">
                                 <cells>
@@ -194,6 +225,9 @@
             <point key="canvasLocation" x="-340" y="400"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="incomplete" width="512" height="512"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mBH-by-q9D"/>
     </inferredMetricsTieBreakers>

@@ -15,7 +15,7 @@
 @property(strong, nonatomic, readonly)NSArray *completeTasks;
 @property(strong, nonatomic, readonly)NSArray *incompleteTasks;
 
-+ (TaskController*)sharedInstance;
++ (TaskController*)sharedController;
 - (void)addTask:(Task *)task;
 - (void)removeTask:(Task *)taskToRemove;
 - (void)saveToPersistentStorage;

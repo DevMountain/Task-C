@@ -63,11 +63,11 @@
         self.task.name = name;
         self.task.due = due;
         self.task.notes = notes;
-        [[TaskController sharedInstance] saveToPersistentStorage];
+        [[TaskController sharedController] saveToPersistentStorage];
       
     } else {
         Task *newTask = [[Task alloc]initWithName:name due:due notes:notes];
-        [[TaskController sharedInstance] addTask:newTask];
+        [[TaskController sharedController] addTask:newTask];
     }
 
 }
