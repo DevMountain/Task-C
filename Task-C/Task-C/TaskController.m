@@ -44,23 +44,29 @@
 
 - (NSArray *)completeTasks {
     NSMutableArray *tasksArray = [NSMutableArray new];
+    
     for (Task *task in self.tasks) {
         if (task.isComplete.intValue == 1) {
             [tasksArray addObject:task];
         }
     }
+    
     NSArray *tasks = tasksArray;
+    
     return tasks;
 }
 
 - (NSArray *)incompleteTasks {
     NSMutableArray *tasksArray = [NSMutableArray new];
+    
     for (Task *task in self.tasks) {
         if (task.isComplete.intValue == 0) {
             [tasksArray addObject:task];
         }
     }
+    
     NSArray *tasks = tasksArray;
+    
     return tasks;
 }
 
@@ -74,9 +80,9 @@
     [self saveToPersistentStorage];
 }
 
-//
-//// MARK: - Persistence
-//
+
+#pragma mark - Persistence
+
 - (void)saveToPersistentStorage {
     NSError *error;
     

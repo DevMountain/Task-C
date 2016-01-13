@@ -31,7 +31,6 @@
     if (self.task) {
         [self updateWithTask: self.task];
     }
-    
 }
 - (IBAction)cancelButtonTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -43,7 +42,6 @@
 }
 
 - (IBAction)datePickerValueChanged:(UIDatePicker *)sender {
-    
     self.taskDueTextField.text = [sender.date stringValue];
     self.dueDateValue = sender.date;
 }
@@ -69,7 +67,6 @@
         Task *newTask = [[Task alloc]initWithName:name due:due notes:notes];
         [[TaskController sharedController] addTask:newTask];
     }
-
 }
 
 - (void)updateWithTask:(Task *)task {
@@ -78,7 +75,6 @@
     self.taskNameTextField.text = task.name;
     self.taskDueTextField.text = [task.due stringValue];
     self.taskNotesTextView.text = task.notes;
-    
 }
 
 @end

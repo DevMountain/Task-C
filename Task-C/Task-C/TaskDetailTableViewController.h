@@ -12,4 +12,5 @@
 @interface TaskDetailTableViewController : UITableViewController
 
 @property (strong, nonatomic)Task *task;
+
 @end

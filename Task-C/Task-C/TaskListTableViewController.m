@@ -12,21 +12,19 @@
 #import "ButtonTableViewCell.h"
 
 @interface TaskListTableViewController () <ButtonTableViewCellDelegate>
-@property(strong, nonatomic)NSMutableArray *tasksArray;
+@property (strong, nonatomic) NSMutableArray *tasksArray;
 @end
 
 @implementation TaskListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.tasksArray = [[TaskController sharedController].incompleteTasks mutableCopy];
     [self.tableView reloadData];
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -38,7 +36,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
     return 1;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -55,7 +52,6 @@
     [cell updateWithTask:task];
     cell.delegate = self;
     
-    
     return cell;
 }
 
@@ -66,6 +62,7 @@
     
         Task *taskToDelete = self.tasksArray[indexPath.row];
         [self.tasksArray removeObject:taskToDelete];
+        
         [[TaskController sharedController] removeTask:taskToDelete];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -82,7 +79,6 @@
         
         detailView.task = task;
     }
-    
 }
 
 
